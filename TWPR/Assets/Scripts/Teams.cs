@@ -18,7 +18,14 @@ public class Teams : MonoBehaviour
 
 
 
+    private void Start()
+    {
+        treasuryHP_A = defaultTreasuryHP_A;
+        teamCash_A = defaultTeamCash_A;
 
+        treasuryHP_B = defaultTreasuryHP_B;
+        teamCash_B = defaultTeamCash_B;
+    }
     private void OnEnable()
     {
         Player.OnTeamUpdate += UpdateTeamStats;
@@ -29,10 +36,20 @@ public class Teams : MonoBehaviour
         Player.OnTeamUpdate -= UpdateTeamStats;
     }
 
-    private void UpdateTeamStats(float a, float b)
+    private void UpdateTeamStats(float hp, float cash, int team)
     {
+        if (team == 0)
+        {
+
+        }
+        else
+        {
+
+        }
+
+
         //treasuryHP = defaultTreasuryHP;
-        Debug.Log(a + b);
+        Debug.Log(hp + cash);
         Debug.Log("Team stats updated!");
     }
 }

@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
     public delegate void StatsChangeAction(int jobLvl, int wealthLvl, int pickpocketLvl, int team);
     public static event StatsChangeAction OnStatsChange;
 
-    public delegate void TeamAction(float treasuryHp, float teamCash);
+    public delegate void TeamAction(float treasuryHp, float teamCash, int team);
     public static event TeamAction OnTeamUpdate;
 
     public string playerName;
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            OnTeamUpdate?.Invoke(5, 5);
+            OnTeamUpdate?.Invoke(5, 5, team);
             Debug.Log("EEEEEEEEEEEE");
             playerName = "NewName";
         }
@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     {
         if(pMessage =="!work" && playerName == pChatter)
         {
+            OnTeamUpdate?.Invoke(0, jobLvl, team);
             jobLvl++;
             Debug.Log("I am working!");
         }
