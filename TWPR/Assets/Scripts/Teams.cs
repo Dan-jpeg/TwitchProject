@@ -46,10 +46,5 @@ public class Teams : MonoBehaviour
         {
 
         }
-
-
-        //treasuryHP = defaultTreasuryHP;
-        Debug.Log(hp + cash);
-        Debug.Log("Team stats updated!");
     }
 }

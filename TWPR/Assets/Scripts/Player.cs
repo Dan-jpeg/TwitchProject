@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
     {
         if (pMessage == "!stay" && playerName == pChatter)
         {
+            OnTeamUpdate?.Invoke(wealthLvl, 0, team);
             wealthLvl++;
             Debug.Log("I am staying!");
         }
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
     {
         if (pMessage == "!attack" && playerName == pChatter)
         {
+            OnTeamUpdate?.Invoke(-wealthLvl, 0, 1 - team);
             pickpocketLvl++;
             Debug.Log("I am attacking!");
         }
