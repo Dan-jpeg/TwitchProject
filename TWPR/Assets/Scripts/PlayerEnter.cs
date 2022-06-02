@@ -25,24 +25,14 @@ public class PlayerEnter : MonoBehaviour
     #endregion
 
 
-
-
-    private void UpdateTeams()
-    {
-
-    }
-
     #region Subscriptions
     private void OnEnable()
     {
         EventManager.OnChatMessage += JoinTheGame;
-        //Player.OnStatsChange += UpdatePlayerStats;
     }
     private void OnDisable()
     {
         EventManager.OnChatMessage -= JoinTheGame;
-
-        //Player.OnStatsChange += UpdatePlayerStats;
     }
     #endregion
 
@@ -73,7 +63,7 @@ public class PlayerEnter : MonoBehaviour
                         bool timerIsNotGoing = true; // it makes it so timer only goes off once.
                         if (players.Count > 4 && timerIsNotGoing)
                         {
-                            OnTimerTrigger?.Invoke(5, players.Count); // first you put seconds amount for timer, then amount of players
+                            OnTimerTrigger?.Invoke(20, players.Count); // first you put seconds amount for timer, then amount of players
                             timerIsNotGoing = false;
                         }
                         /*
@@ -113,12 +103,10 @@ public class PlayerEnter : MonoBehaviour
             Quaternion.identity
             );
 
-        
         NewPlayer.GetComponent<Player>().playerName = players[players.Count - 1].playerName;
         NewPlayer.GetComponent<Player>().jobLvl = players[players.Count - 1].jobLvl;
         NewPlayer.GetComponent<Player>().wealthLvl = players[players.Count - 1].wealthLvl;
         NewPlayer.GetComponent<Player>().pickpocketLvl = players[players.Count - 1].pickpocketLvl;
         NewPlayer.GetComponent<Player>().team = players[players.Count - 1].team;
     }
-    
 }

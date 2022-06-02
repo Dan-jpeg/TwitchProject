@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public int pickpocketLvl;
     public int team;
 
+    public static int numberOfPlayers;
+
     public Player
         (string newName,
         int newJobLvl,
@@ -29,17 +31,22 @@ public class Player : MonoBehaviour
     }
 
 
-
-
-
+    private void Start()
+    {
+        numberOfPlayers++;
+    }
     private void OnEnable()
     {
+        EventManager.OnTimerEndTrigger += CheckTimer;
+
         EventManager.OnChatMessage += Work;
         EventManager.OnChatMessage += Stay;
         EventManager.OnChatMessage += Attack;
     }
     private void OnDisable()
     {
+        EventManager.OnTimerEndTrigger -= CheckTimer;
+
         EventManager.OnChatMessage -= Work;
         EventManager.OnChatMessage -= Stay;
         EventManager.OnChatMessage -= Attack;
@@ -47,12 +54,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            OnTeamUpdate?.Invoke(5, 5, team);
-            Debug.Log("EEEEEEEEEEEE");
-            playerName = "NewName";
-        }
+
     }
 
     public void Work(string pChatter, string pMessage)
@@ -77,9 +79,14 @@ public class Player : MonoBehaviour
     {
         if (pMessage == "!attack" && playerName == pChatter)
         {
-            OnTeamUpdate?.Invoke(-wealthLvl, 0, 1 - team);
+            OnTeamUpdate?.Invoke(-pickpocketLvl, 0, 1 - team);
             pickpocketLvl++;
             Debug.Log("I am attacking!");
         }
+    }
+
+    public void CheckTimer()
+    {
+
     }
 }

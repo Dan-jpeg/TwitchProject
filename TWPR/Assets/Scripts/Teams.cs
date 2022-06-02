@@ -40,11 +40,13 @@ public class Teams : MonoBehaviour
     {
         if (team == 0)
         {
-
+            treasuryHP_A += hp;
+            teamCash_A += cash;
         }
         else
         {
-
+            treasuryHP_B += hp;
+            teamCash_B += cash;
         }
     }
 }

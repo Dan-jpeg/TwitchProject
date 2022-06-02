@@ -10,7 +10,8 @@ public class EventManager : MonoBehaviour
     public delegate void ChatAction(string chatter,string message);
     public static event ChatAction OnChatMessage;
 
-
+    public delegate void TimerEndAction();
+    public static event TimerEndAction OnTimerEndTrigger;
     private void OnEnable()
     {
         PlayerEnter.OnTimerTrigger += BeginTimer;
@@ -65,7 +66,7 @@ public class EventManager : MonoBehaviour
 
     public void BeginTimer(int timerTime, int playersCount)
     {
-        if (playersCount>=0)
+        if (playersCount>=1)
         {
             timerGoing = true;
             elapsedTime = timerTime;
@@ -76,6 +77,7 @@ public class EventManager : MonoBehaviour
     public void EndTimer()
     {
         timerGoing = false;
+        OnTimerEndTrigger?.Invoke();
     }
     private IEnumerator UpdateTimer()
     {
