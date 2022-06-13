@@ -10,7 +10,7 @@ public class EventManager : MonoBehaviour
     public delegate void ChatAction(string chatter,string message);
     public static event ChatAction OnChatMessage;
 
-    public delegate void TimerEndAction();
+    public delegate void TimerEndAction(bool timerGoing);
     public static event TimerEndAction OnTimerEndTrigger;
     private void OnEnable()
     {
@@ -27,7 +27,7 @@ public class EventManager : MonoBehaviour
     public TMP_Text timeCounter;
 
     private TimeSpan timePlaying;
-    private bool timerGoing;
+    private bool timerGoing = false;
 
     private float elapsedTime;
     #endregion
@@ -76,8 +76,8 @@ public class EventManager : MonoBehaviour
     }
     public void EndTimer()
     {
+        OnTimerEndTrigger?.Invoke(timerGoing);
         timerGoing = false;
-        OnTimerEndTrigger?.Invoke();
     }
     private IEnumerator UpdateTimer()
     {

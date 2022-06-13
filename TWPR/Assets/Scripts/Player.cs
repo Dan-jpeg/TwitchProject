@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void CheckTimer()
+    public void CheckTimer(bool timerGoing)
     {
 
     }

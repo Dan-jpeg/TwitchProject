@@ -29,10 +29,12 @@ public class PlayerEnter : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnChatMessage += JoinTheGame;
+        EventManager.OnTimerEndTrigger += CheckTimer;
     }
     private void OnDisable()
     {
         EventManager.OnChatMessage -= JoinTheGame;
+        EventManager.OnTimerEndTrigger -= CheckTimer;
     }
     #endregion
 
@@ -108,5 +110,10 @@ public class PlayerEnter : MonoBehaviour
         NewPlayer.GetComponent<Player>().wealthLvl = players[players.Count - 1].wealthLvl;
         NewPlayer.GetComponent<Player>().pickpocketLvl = players[players.Count - 1].pickpocketLvl;
         NewPlayer.GetComponent<Player>().team = players[players.Count - 1].team;
+    }
+
+    public void CheckTimer(bool timerGoing)
+    {
+
     }
 }
